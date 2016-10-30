@@ -49,12 +49,12 @@
 
             elements.box.on("scroll", function (e) {
                 var scroll = elements.box.scrollTop;
-                
-                setIndexes(Math.round(scroll / (current.heights.item)));
+                var si = Math.round(scroll / current.heights.item);
+                setIndexes(si);
                 elements.window.css("margin-top", scroll + "px");
-                //scope.debug.indexes = current;
-                
-                //console.log(current.indexes);
+                scope.debug.indexes = current;
+                scope.debug.scroll = scroll;
+                console.log(current.indexes);
                 scope.$apply();
             });
 
@@ -65,6 +65,7 @@
             });
 
             function setIndexes(startIndex) {
+                console.log(startIndex);
                 current.indexes.start = startIndex;
                 current.indexes.end = getEndIndex(current.indexes.start, current.windowLength, current.indexes.max);
                 setWindow(scope.vaWindow, scope.vaSrc, current.indexes.start, current.indexes.end);
