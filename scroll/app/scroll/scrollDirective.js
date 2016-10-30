@@ -28,14 +28,28 @@
         var items = [];
 
         function link(scope, element, attr) {
+            var date = new Date();
+
             scope.debug = {};
+
             var elements = {
                 box: element.find(".va-scroll")
                 , spacer: element.find(".va-scroll-spacer")
                 , window: element.find(".va-scroll-window") 
             };
 
-            var current = { heights: { item: 10, spacer: 0, box: 0 }, indexes: {start:0, end: 0, max: 0} , windowLength: 10  };
+            var current = {
+                heights: { item: 10, spacer: 0, box: 0 }
+                , indexes: { start: 0, end: 0, max: 0 }
+                , windowLength: 10
+                , triggers: {}
+                , counts: { scroll: 0 }
+                , timers: { scroll: date.getTime() }
+                , intervals: {scroll: null}
+                 
+            };
+
+            scope.counts = {scroll: 0};
 
             scope.$watch("vaSrc", function (value) {
                 if (value) {
@@ -48,13 +62,31 @@
             });
 
             elements.box.on("scroll", function (e) {
-                var scroll = elements.box.scrollTop;
+                date = new Date();
+                var elem = elements.box;
+                //console.log(elem[0].scrollTop, elem);
+                var scroll = elements.box[0].scrollTop;
                 var si = Math.round(scroll / current.heights.item);
-                setIndexes(si);
+
+                
+
                 elements.window.css("margin-top", scroll + "px");
-                scope.debug.indexes = current;
-                scope.debug.scroll = scroll;
-                console.log(current.indexes);
+                if (current.intervals.scroll) {
+                    $interval.cancel(current.intervals.scroll);
+                }
+                current.intervals.scroll = $interval(function () {
+                    setIndexes(si);
+                }, 19, 1);
+                
+
+                //scope.debug.indexes = current;
+                //scope.debug.scroll = current.counts.scroll;
+                current.counts.scroll++;
+                var cTime = date.getTime();
+                //console.log("cTime: ", cTime);
+                var cDelay = cTime - current.timers.scroll;
+                current.timers.scroll = cTime;
+                scope.debug.delay = cDelay;
                 scope.$apply();
             });
 
@@ -65,7 +97,7 @@
             });
 
             function setIndexes(startIndex) {
-                console.log(startIndex);
+
                 current.indexes.start = startIndex;
                 current.indexes.end = getEndIndex(current.indexes.start, current.windowLength, current.indexes.max);
                 setWindow(scope.vaWindow, scope.vaSrc, current.indexes.start, current.indexes.end);
