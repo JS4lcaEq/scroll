@@ -48,7 +48,7 @@
             });
 
             elements.box.on("scroll", function (e) {
-                var scroll = e.originalEvent.originalTarget.scrollTop;
+                var scroll = elements.box.scrollTop;
                 
                 setIndexes(Math.round(scroll / (current.heights.item)));
                 elements.window.css("margin-top", scroll + "px");
