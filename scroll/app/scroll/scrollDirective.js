@@ -23,6 +23,16 @@
         }
     }
 
+    function stat(data, input) {
+        if (input < 100) {
+            if (!data[input]) {
+                data[input] = 0;
+            }
+            data[input]++;
+        }
+
+    }
+
     function fn($interval) {
 
         var items = [];
@@ -46,7 +56,7 @@
                 , counts: { scroll: 0 }
                 , timers: { scroll: date.getTime() }
                 , intervals: {scroll: null}
-                 
+                , stat: []
             };
 
             scope.counts = {scroll: 0};
@@ -85,8 +95,10 @@
                 var cTime = date.getTime();
                 //console.log("cTime: ", cTime);
                 var cDelay = cTime - current.timers.scroll;
+                stat(current.stat, cDelay);
                 current.timers.scroll = cTime;
                 scope.debug.delay = cDelay;
+                scope.debug.stat = current.stat;
                 scope.$apply();
             });
 
