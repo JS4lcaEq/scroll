@@ -86,7 +86,7 @@
                 }
                 current.intervals.scroll = $interval(function () {
                     setIndexes(si);
-                }, 19, 1);
+                }, 16, 1);
                 
 
                 //scope.debug.indexes = current;
@@ -95,8 +95,8 @@
                 var cTime = date.getTime();
                 //console.log("cTime: ", cTime);
                 var cDelay = cTime - current.timers.scroll;
-                stat(current.stat, cDelay);
-                current.timers.scroll = cTime;
+                //stat(current.stat, cDelay);
+                //current.timers.scroll = cTime;
                 scope.debug.delay = cDelay;
                 scope.debug.stat = current.stat;
                 scope.$apply();

@@ -94,7 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\oscilloscope\oscilloscopeTemplate.html" />
+    <Content Include="app\oscilloscope\oscilloscopeDirective.html" />
     <Content Include="app\oscilloscope\oscilloscopeDirective.js" />
     <Content Include="app\scroll\sample.js" />
     <Content Include="app\scroll\scrollDirective.js" />
@@ -151,6 +151,7 @@
     <Content Include="scripts\jquery-3.1.1.slim.js" />
     <Content Include="scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="scripts\ui-scroll.min.js" />
+    <Content Include="style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

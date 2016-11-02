@@ -24,8 +24,11 @@
             }
 
             scope.$watch("vaSrc", function (newValue) {
-                for (var i = 0; i < scope.vaSrc.length; i++) {
-                    context.fillRect(i, 5, 1, scope.vaSrc[i]);
+                if (newValue) {
+                    elements.canvas[0].width = elements.canvas[0].width;
+                    for (var i = 0; i < scope.vaSrc.length; i++) {
+                        context.fillRect(i, 5, 1, scope.vaSrc[i]);
+                    }
                 }
             });
         }
@@ -33,7 +36,7 @@
 
 
         return {
-            templateUrl: function () { return scriptPath + "oscilloscopeTemplate.html?t=" + t; }
+            templateUrl: function () { return scriptPath + "oscilloscopeDirective.html?t=" + t; }
             , link: link
             , transclude: true
             , scope: {

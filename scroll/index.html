@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
 
 
@@ -72,8 +72,12 @@
             <div class="col-md-12">
                 <h2>Directive Sample</h2>
                 [ {{ctrl.src.length}} ]
-                <div style="border: 1px solid #f0f; height: 200px;">
-                    <va-scroll va-src="ctrl.src" va-window="ctrl.window"><ul><li ng-repeat="item in ctrl.window">{{item.descr}}</li></ul></va-scroll>
+                <div id="vaScrollBox" style="border: 1px solid #f0f; height: 200px;">
+                    <va-scroll va-src="ctrl.src" va-window="ctrl.window">
+                        <ul>
+                            <li ng-repeat="(index, item) in ctrl.window" ng-click="onClick(item)">[{{index}}] = {{item.descr}}</li>
+                        </ul>
+                    </va-scroll>
                 </div>
                 {{ctrl.src[ctrl.src.length - 1]}}
 
@@ -82,7 +86,7 @@
             <div class="col-md-12">
                 <h2>Directive Sample</h2>
                 <div style="border: 1px solid #f0f; height: 200px; width: 200px;">
-                    <va-oscilloscope va-src="[20,30,40]"></va-oscilloscope>
+                    <va-oscilloscope va-src-="[20,30,40]"></va-oscilloscope>
                 </div>
             </div>
 
