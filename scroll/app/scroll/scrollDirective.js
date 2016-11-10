@@ -72,6 +72,12 @@
                 }
             });
 
+            scope.$watch("vaLength", function (value) {
+                if (value) {
+                    current.windowLength = value;
+                }
+            });
+
             elements.box.on("scroll", function (e) {
                 var ntrvl = 1;
                 if (current.bussy) {
@@ -79,14 +85,7 @@
                 } else {
                     current.bussy = true;
                 }
-                //date = new Date();
-                var elem = elements.box;
-                //console.log(elem[0].scrollTop, elem);
                 var scroll = elements.box[0].scrollTop;
-                
-
-                
-
                 elements.window.css("margin-top", scroll + "px");
                 if (current.intervals.scroll) {
                     $interval.cancel(current.intervals.scroll);
@@ -96,21 +95,8 @@
                     setIndexes(si);
                     $interval(function () {
                         current.bussy = false;
-                    }, 1, 1);               
-                }, ntrvl, 1);
-                
-
-                //scope.debug.indexes = current;
-                //scope.debug.scroll = current.counts.scroll;
-                //current.counts.scroll++;
-                //var cTime = date.getTime();
-                //console.log("cTime: ", cTime);
-                //var cDelay = cTime - current.timers.scroll;
-                //stat(current.stat, cDelay);
-                //current.timers.scroll = cTime;
-                //scope.debug.delay = cDelay;
-                //scope.debug.stat = current.stat;
-                scope.$apply();
+                    }, 0, 1);               
+                }, ntrvl, 1);                
             });
 
             elements.box.on("resize", function (e) {

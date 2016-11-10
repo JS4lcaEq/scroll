@@ -40,7 +40,7 @@
 
     }
 
-    angular.module('app', ["vaScrollDirective", "vaOscilloscopeDirective"]);
+    angular.module('app', ["vaScrollDirective"]);
 
     angular.module('app').controller('MainCtrl', MainCtrl);
 

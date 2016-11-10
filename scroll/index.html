@@ -72,8 +72,8 @@
             <div class="col-md-12">
                 <h2>Directive Sample</h2>
                 [ {{ctrl.src.length}} ]
-                <div id="vaScrollBox" style="border: 1px solid #f0f; height: 200px;">
-                    <va-scroll va-src="ctrl.src" va-window="ctrl.window">
+                <div id="vaScrollBox" style="border: 1px solid #f0f; height: 300px;">
+                    <va-scroll va-src="ctrl.src" va-window="ctrl.window" va-length="15">
                         <ul>
                             <li ng-repeat="(index, item) in ctrl.window" ng-click="onClick(item)">{{item.descr}}</li>
                         </ul>
@@ -105,7 +105,6 @@
     <!--<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>-->
     <script src="scripts/angular.min.js"></script>
     <script src="app/scroll/scrollDirective.js"></script>
-    <script src="app/oscilloscope/oscilloscopeDirective.js"></script>
     <script src="app/app.js"></script>
     <script>angular.bootstrap("html", ['app']);</script>
 </body>
