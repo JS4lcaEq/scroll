@@ -57,6 +57,7 @@
                 , timers: { scroll: date.getTime() }
                 , intervals: {scroll: null}
                 , stat: []
+                , bussy: false
             };
 
             scope.counts = {scroll: 0};
@@ -72,11 +73,17 @@
             });
 
             elements.box.on("scroll", function (e) {
-                date = new Date();
+                var ntrvl = 1;
+                if (current.bussy) {
+                    ntrvl = 50;
+                } else {
+                    current.bussy = true;
+                }
+                //date = new Date();
                 var elem = elements.box;
                 //console.log(elem[0].scrollTop, elem);
                 var scroll = elements.box[0].scrollTop;
-                var si = Math.round(scroll / current.heights.item);
+                
 
                 
 
@@ -85,20 +92,24 @@
                     $interval.cancel(current.intervals.scroll);
                 }
                 current.intervals.scroll = $interval(function () {
+                    var si = Math.round(scroll / current.heights.item);
                     setIndexes(si);
-                }, 16, 1);
+                    $interval(function () {
+                        current.bussy = false;
+                    }, 1, 1);               
+                }, ntrvl, 1);
                 
 
                 //scope.debug.indexes = current;
                 //scope.debug.scroll = current.counts.scroll;
-                current.counts.scroll++;
-                var cTime = date.getTime();
+                //current.counts.scroll++;
+                //var cTime = date.getTime();
                 //console.log("cTime: ", cTime);
-                var cDelay = cTime - current.timers.scroll;
+                //var cDelay = cTime - current.timers.scroll;
                 //stat(current.stat, cDelay);
                 //current.timers.scroll = cTime;
-                scope.debug.delay = cDelay;
-                scope.debug.stat = current.stat;
+                //scope.debug.delay = cDelay;
+                //scope.debug.stat = current.stat;
                 scope.$apply();
             });
 
