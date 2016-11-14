@@ -1,7 +1,8 @@
 ﻿(function () {
 
     function getSpacerHeight(srcLength, windowLength, itemHeight, boxHeight) {
-        var ret = (srcLength + windowLength) * itemHeight;
+        var ret = (srcLength + windowLength - 1) * itemHeight;
+        //var ret = (srcLength) * itemHeight;
         if (ret < boxHeight) {
             ret = boxHeight;
         }
@@ -49,7 +50,7 @@
             };
 
             var current = {
-                heights: { item: 10, spacer: 0, box: 0 }
+                heights: { item: 20, spacer: 0, box: 0 }
                 , indexes: { start: 0, end: 0, max: 0 }
                 , windowLength: 10
                 , triggers: {}
@@ -68,13 +69,14 @@
                     current.heights.box = elements.box.height();
                     current.heights.spacer = getSpacerHeight(scope.vaSrc.length, current.windowLength, current.heights.item, current.heights.box);
                     elements.spacer.height(current.heights.spacer);
+                    elements.window.height(current.heights.box);
                     setIndexes(current.indexes.start);
                 }
             });
 
             scope.$watch("vaLength", function (value) {
                 if (value) {
-                    current.windowLength = value;
+                    current.windowLength = value - 0;
                 }
             });
 
