@@ -81,21 +81,20 @@
             elements.box.on("scroll", function (e) {
                 var ntrvl = 1;
                 if (current.bussy) {
-                    ntrvl = 50;
-                } else {
-                    current.bussy = true;
-                }
+                    ntrvl = 90;
+                } 
                 var scroll = elements.box[0].scrollTop;
                 elements.window.css("margin-top", scroll + "px");
                 if (current.intervals.scroll) {
                     $interval.cancel(current.intervals.scroll);
                 }
                 current.intervals.scroll = $interval(function () {
+                    current.bussy = true;
                     var si = Math.round(scroll / current.heights.item);
                     setIndexes(si);
                     $interval(function () {
                         current.bussy = false;
-                    }, 0, 1);               
+                    }, 1, 1);               
                 }, ntrvl, 1);                
             });
 
