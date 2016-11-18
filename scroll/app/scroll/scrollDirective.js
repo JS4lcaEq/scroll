@@ -1,7 +1,7 @@
 ﻿(function () {
 
     function getSpacerHeight(srcLength, windowLength, itemHeight, boxHeight) {
-        var ret = (srcLength + windowLength - 1) * itemHeight;
+        var ret = (srcLength + 1) * itemHeight;
         //var ret = (srcLength) * itemHeight;
         if (ret < boxHeight) {
             ret = boxHeight;
@@ -50,7 +50,7 @@
             };
 
             var current = {
-                heights: { item: 20, spacer: 0, box: 0 }
+                heights: { item: 19, spacer: 0, box: 0 }
                 , indexes: { start: 0, end: 0, max: 0 }
                 , windowLength: 10
                 , triggers: {}
