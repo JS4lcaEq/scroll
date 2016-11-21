@@ -34,7 +34,7 @@
 
     }
 
-    function fn($interval) {
+    function fn($timeout) {
 
         var items = [];
 
@@ -50,7 +50,7 @@
             };
 
             var current = {
-                heights: { item: 19, spacer: 0, box: 0 }
+                heights: { item: 10, spacer: 0, box: 0 }
                 , indexes: { start: 0, end: 0, max: 0 }
                 , windowLength: 10
                 , triggers: {}
@@ -83,21 +83,21 @@
             elements.box.on("scroll", function (e) {
                 var ntrvl = 1;
                 if (current.bussy) {
-                    ntrvl = 90;
+                    ntrvl = 50;
                 } 
                 var scroll = elements.box[0].scrollTop;
                 elements.window.css("margin-top", scroll + "px");
                 if (current.intervals.scroll) {
-                    $interval.cancel(current.intervals.scroll);
+                    $timeout.cancel(current.intervals.scroll);
                 }
-                current.intervals.scroll = $interval(function () {
+                current.intervals.scroll = $timeout(function () {
                     current.bussy = true;
                     var si = Math.round(scroll / current.heights.item);
                     setIndexes(si);
-                    $interval(function () {
+                    $timeout(function () {
                         current.bussy = false;
-                    }, 1, 1);               
-                }, ntrvl, 1);                
+                    }, 1);               
+                }, ntrvl);                
             });
 
             elements.box.on("resize", function (e) {
