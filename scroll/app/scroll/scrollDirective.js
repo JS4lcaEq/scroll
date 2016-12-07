@@ -50,7 +50,7 @@
             };
 
             var current = {
-                heights: { item: 10, spacer: 0, box: 0 }
+                heights: { item: 19, spacer: 0, box: 0 }
                 , indexes: { start: 0, end: 0, max: 0 }
                 , windowLength: 10
                 , triggers: {}
@@ -59,6 +59,7 @@
                 , intervals: {scroll: null}
                 , stat: []
                 , bussy: false
+                , scroll: 0
             };
 
             scope.counts = {scroll: 0};
@@ -81,23 +82,33 @@
             });
 
             elements.box.on("scroll", function (e) {
-                var ntrvl = 1;
-                if (current.bussy) {
-                    ntrvl = 50;
-                } 
+ 
                 var scroll = elements.box[0].scrollTop;
-                elements.window.css("margin-top", scroll + "px");
-                if (current.intervals.scroll) {
-                    $timeout.cancel(current.intervals.scroll);
+                var dScroll = Math.abs(scroll - current.scroll);
+                
+                if (dScroll > 18 || scroll < 10 || scroll > (current.heights.spacer - 10) ) {
+                    var ntrvl = 1;
+                    if (current.bussy) {
+                        ntrvl = 50;
+                    }
+                    current.scroll = scroll;
+                    elements.window.css("margin-top", scroll + "px");
+                    console.log(scroll);
+                    if (current.intervals.scroll) {
+                        $timeout.cancel(current.intervals.scroll);
+                    }
+                    current.intervals.scroll = $timeout(function () {
+                        current.bussy = true;
+                        var si = Math.round(scroll / current.heights.item);
+                    
+                        $timeout(function () {
+                            setIndexes(si);
+                            current.bussy = false;
+                        }, 1);               
+                    }, ntrvl);
                 }
-                current.intervals.scroll = $timeout(function () {
-                    current.bussy = true;
-                    var si = Math.round(scroll / current.heights.item);
-                    setIndexes(si);
-                    $timeout(function () {
-                        current.bussy = false;
-                    }, 1);               
-                }, ntrvl);                
+
+                
             });
 
             elements.box.on("resize", function (e) {
