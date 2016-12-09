@@ -3,3 +3,22 @@
     margin: 0;
     padding: 0;
 }
+
+.va-scroll {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.va-scroll-spacer {
+    height: 400px;
+    background-color:aliceblue;
+    
+    overflow:hidden;
+}
+
+.va-scroll-window {
+    height: 298px;
+    background-color:antiquewhite;
+    margin-top: 50px;
+    overflow:hidden;
+}
