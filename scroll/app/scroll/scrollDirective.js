@@ -82,17 +82,23 @@
             });
 
             elements.box.on("scroll", function (e) {
-                var scroll = elements.box[0].scrollTop;
-                if (scroll != 50) {
-                    if (scroll > 50) {
+                current.scroll = elements.box[0].scrollTop;
+                if (current.scroll != 50) {
+                    if (current.scroll > 69) {
                         setIndexes(current.indexes.start + 1);
-                    } else {
-                        setIndexes(current.indexes.start - 1);
+                        elements.box.scrollTop(50);
+                        scope.$apply();
                     }
-                    elements.box.scrollTop(50);
-                    console.log("scroll", scroll, "current.indexes.start", current.indexes.start);
-                    scope.$apply();
+                    if ((current.scroll < 31)) {
+                        setIndexes(current.indexes.start - 1);
+                        elements.box.scrollTop(50);
+                        scope.$apply();
+                    }
+                    //elements.box.scrollTop(50);
+                    //console.log("scroll", scroll, "current.indexes.start", current.indexes.start);
+                    
                 }
+
 
                 //var dScroll = Math.abs(scroll - current.scroll);
 
