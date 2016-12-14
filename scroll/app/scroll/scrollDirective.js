@@ -54,7 +54,7 @@
                 , indexes: { start: 0, end: 0, max: 0 }
                 , windowLength: 10
                 , triggers: {}
-                , counts: { scroll: 0 }
+                , counts: { scroll: 0, calculates: 0 }
                 , timers: { scroll: date.getTime() }
                 , intervals: { scroll: null }
                 , stat: []
@@ -69,8 +69,8 @@
                     current.indexes.max = value.length - 1;
                     current.heights.box = elements.box.height();
                     current.heights.spacer = getSpacerHeight(scope.vaSrc.length, current.windowLength, current.heights.item, current.heights.box);
-                    //elements.spacer.height(current.heights.spacer);
-                    //elements.window.height(current.heights.box);
+                    elements.spacer.height(current.heights.spacer);
+                    elements.window.height(current.heights.box);
                     setIndexes(current.indexes.start);
                 }
             });
@@ -82,25 +82,43 @@
             });
 
             elements.box.on("scroll", function (e) {
-                current.scroll = elements.box[0].scrollTop;
-                if (current.scroll != 50) {
-                    if (current.scroll > 69) {
-                        setIndexes(current.indexes.start + 1);
-                        elements.box.scrollTop(50);
-                        scope.$apply();
-                    }
-                    if ((current.scroll < 31)) {
-                        setIndexes(current.indexes.start - 1);
-                        elements.box.scrollTop(50);
-                        scope.$apply();
-                    }
-                    //elements.box.scrollTop(50);
-                    //console.log("scroll", scroll, "current.indexes.start", current.indexes.start);
+                current.counts.scroll++;
+;
+                var scroll = elements.box[0].scrollTop;
+
+                //var diff = scroll - current.scroll;
+                //if (scroll != 0) {
+                //    current.counts.calculates++;
+                //    console.log(current.counts.scroll, " / ", current.counts.calculates, " = ", current.scroll);
+                //    if (current.scroll > 100) {
+                //        setIndexes(current.indexes.start + 1);
+                //        elements.box.scrollTop(scroll);
+                //        scope.$apply();
+                //    }
+                //    if ((current.scroll < 100)) {
+                //        setIndexes(current.indexes.start - 1);
+                //        elements.box.scrollTop(scroll);
+                //        scope.$apply();
+                //    }
+                //    //elements.box.scrollTop(50);
+                //    //console.log("scroll", scroll, "current.indexes.start", current.indexes.start);
                     
+                //}
+
+
+                var dScroll = Math.abs( scroll - current.scroll);
+                
+                if (dScroll >= current.heights.item) {
+                    current.counts.calculates++;
+                    //var margin = scroll / current.heights.item;
+                    
+                    current.scroll = scroll;
+                    var si = Math.round(scroll / current.heights.item);
+                    elements.window.css("margin-top", si * current.heights.item + "px");
+                    setIndexes(si);
+                    scope.$apply();
                 }
-
-
-                //var dScroll = Math.abs(scroll - current.scroll);
+                console.log(current.counts.scroll, " / ", current.counts.calculates, " = ", scroll, " / ", dScroll);
 
                 //if (dScroll >= current.heights.item || scroll < current.heights.item || scroll > (current.heights.spacer - current.heights.item)) {
                 //    var ntrvl = 1;
