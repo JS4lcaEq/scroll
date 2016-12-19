@@ -4,7 +4,7 @@
         var self = this;
         this.test = "test";
         this.cnt = 100;
-        this.src = null;//[{ index: 0, descr: "Descr[0] = 0" }];
+        this.src = [];//[{ index: 0, descr: "Descr[0] = 0" }];
         this.len = 10;
         this.window = [];
         this.index = 0;
@@ -40,7 +40,7 @@
 
     }
 
-    angular.module('app', ["vaScrollDirective"]);
+    angular.module('app', ["vaScrollDirective", "vs-repeat"]);
 
     angular.module('app').controller('MainCtrl', MainCtrl);
 

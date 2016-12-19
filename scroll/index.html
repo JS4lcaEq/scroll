@@ -82,7 +82,11 @@
                 {{ctrl.src[ctrl.src.length - 1]}}
 
             </div>
-
+            <div class="col-md-12">
+                <div vs-repeat="10" style="border: solid 1px #000; height: 200px; overflow-y: auto;">
+                    <div ng-repeat="item in ctrl.src">{{item}}</div>
+                </div>
+            </div>
         </div>
 
 
@@ -104,6 +108,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>-->
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-vs-repeat.js"></script>
     <script src="app/scroll/scrollDirective.js"></script>
     <script src="app/app.js"></script>
     <script>angular.bootstrap("html", ['app']);</script>

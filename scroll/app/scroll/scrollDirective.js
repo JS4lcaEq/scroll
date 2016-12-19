@@ -114,7 +114,7 @@
                     
                     current.scroll = scroll;
                     var si = Math.round(scroll / current.heights.item);
-                    elements.window.css("margin-top", si * current.heights.item + "px");
+                    elements.window.css("margin-top", scroll + "px"); //si * current.heights.item
                     setIndexes(si);
                     scope.$apply();
                 }
