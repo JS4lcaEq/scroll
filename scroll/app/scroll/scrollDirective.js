@@ -19,6 +19,8 @@
 
     function setWindow(window, src, startIndex, endIndex) {
         window.length = 0;
+        //window = null;
+        //window = [];
         for (var i = startIndex; i <= endIndex; i++) {
             window.push(src[i]);
         }
@@ -83,7 +85,7 @@
 
             elements.box.on("scroll", function (e) {
                 current.counts.scroll++;
-;
+                ;
                 var scroll = elements.box[0].scrollTop;
 
                 //var diff = scroll - current.scroll;
@@ -102,22 +104,29 @@
                 //    }
                 //    //elements.box.scrollTop(50);
                 //    //console.log("scroll", scroll, "current.indexes.start", current.indexes.start);
-                    
+
                 //}
 
 
-                var dScroll = Math.abs( scroll - current.scroll);
-                
-                if (dScroll >= current.heights.item) {
-                    current.counts.calculates++;
-                    //var margin = scroll / current.heights.item;
-                    
-                    current.scroll = scroll;
-                    var si = Math.round(scroll / current.heights.item);
-                    elements.window.css("margin-top", scroll + "px"); //si * current.heights.item
-                    setIndexes(si);
-                    scope.$apply();
+                var dScroll = Math.abs(scroll - current.scroll);
+
+                if (dScroll >= current.heights.item || scroll == 0) {
+                    scope.$apply(function () {
+                        current.counts.calculates++;
+                        //var margin = scroll / current.heights.item;
+
+                        current.scroll = scroll;
+                        var si = Math.round((scroll / current.heights.item));
+                        elements.window.css("margin-top", scroll + "px"); //si * current.heights.item
+
+                        setIndexes(si);
+                        console.log("si:", si);
+                    });
+
+
+
                 }
+
                 console.log(current.counts.scroll, " / ", current.counts.calculates, " = ", scroll, " / ", dScroll);
 
                 //if (dScroll >= current.heights.item || scroll < current.heights.item || scroll > (current.heights.spacer - current.heights.item)) {
@@ -157,6 +166,8 @@
 
                 }
                 current.indexes.end = getEndIndex(current.indexes.start, current.windowLength, current.indexes.max);
+                scope.vaWindow.length = 0;
+                scope.vaWindow = [];
                 setWindow(scope.vaWindow, scope.vaSrc, current.indexes.start, current.indexes.end);
 
             }
