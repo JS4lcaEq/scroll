@@ -19,8 +19,6 @@
 
     function setWindow(window, src, startIndex, endIndex) {
         window.length = 0;
-        //window = null;
-        //window = [];
         for (var i = startIndex; i <= endIndex; i++) {
             window.push(src[i]);
         }
@@ -87,6 +85,7 @@
                 current.counts.scroll++;
                 ;
                 var scroll = elements.box[0].scrollTop;
+                scope.scroll = scroll;
 
                 //var diff = scroll - current.scroll;
                 //if (scroll != 0) {
