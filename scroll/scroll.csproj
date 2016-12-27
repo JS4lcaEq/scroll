@@ -94,7 +94,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\scroll\sample.js" />
     <Content Include="app\scroll\scrollDirective.js" />
     <Content Include="app\scroll\scrollDirective.html" />
     <Content Include="packages.config" />
