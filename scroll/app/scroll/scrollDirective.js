@@ -82,8 +82,9 @@
             });
 
             elements.box.on("scroll", function (e) {
-                current.counts.scroll++;
-                ;
+
+                scope.$apply(function () {
+                    current.counts.scroll++;
                 var scroll = elements.box[0].scrollTop;
                 scope.scroll = scroll;
 
@@ -109,8 +110,8 @@
 
                 var dScroll = Math.abs(scroll - current.scroll);
 
-                if (dScroll >= current.heights.item || scroll == 0) {
-                    scope.$apply(function () {
+                if ((dScroll >= current.heights.item * 2) || (scroll == 0)) {
+                    
                         current.counts.calculates++;
                         //var margin = scroll / current.heights.item;
 
@@ -120,13 +121,13 @@
 
                         setIndexes(si);
                         console.log("si:", si);
-                    });
+                    
 
 
 
-                }
-
-                console.log(current.counts.scroll, " / ", current.counts.calculates, " = ", scroll, " / ", dScroll);
+                }console.log(current.counts.scroll, " / ", current.counts.calculates, " = ", scroll, " / ", dScroll);
+});
+                
 
                 //if (dScroll >= current.heights.item || scroll < current.heights.item || scroll > (current.heights.spacer - current.heights.item)) {
                 //    var ntrvl = 1;
