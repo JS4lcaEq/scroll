@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-12">
                 <h2>Directive Sample</h2>
-                [ {{ctrl.src.length}} ]
+
                 <div id="vaScrollBox" style="border: 1px solid #f0f; height: 300px;">
                     <va-scroll va-src="ctrl.src" va-window="ctrl.window" va-length="ctrl.len">
                         <ul>
@@ -79,7 +79,7 @@
                         </ul>
                     </va-scroll>
                 </div>
-                <p>{{ctrl.window}}</p>
+                <p>{{ctrl.window[0]}}</p>
                 {{ctrl.src[ctrl.src.length - 1]}}
 
             </div>
