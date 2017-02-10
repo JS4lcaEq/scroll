@@ -2,6 +2,18 @@
 
     function MainCtrl($scope) {
         var self = this;
+        var elements = { box: $("#vsBx"), win: $("#vsWndw") };
+        var s0 = 0;
+        elements.box.on("scroll", function (e) {
+            var s = e.originalEvent.srcElement.scrollTop;
+            if (Math.abs(s - s0) > 19) {
+            elements.win.css("margin-top", s + "px");
+            s0 = s;
+            console.log(s);
+            }
+            
+
+        });
         this.test = "test";
         this.cnt = 100;
         this.src = [];//[{ index: 0, descr: "Descr[0] = 0" }];

@@ -89,7 +89,11 @@
                 </div>-->
                 <div id="vsBx">
                     <div id="vsSpcr">
-                        <div id="vsWndw">vsWndw</div>
+                        <div id="vsWndw">
+                            <ul>
+                                <li ng-repeat="(index, item) in ctrl.window" >{{item}}</li>
+                            </ul>
+                        </div>
                         <div id="vsZ0"></div>
                         <div id="vsZ1"></div>
                     </div>
