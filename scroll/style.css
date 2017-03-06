@@ -22,3 +22,14 @@
     /*margin-top: 100px;*/
     overflow:hidden;
 }
+table {
+    width: 200px;
+}
+td, th {
+    border: solid 1px #000000;
+}
+tbody {
+    display:table-row-group;
+    height: 40px;
+    overflow:auto;
+}

@@ -109,7 +109,7 @@
 
                 var dScroll = Math.abs(scroll - current.scroll);
 
-                if (dScroll >= current.heights.item || scroll == 0) {
+                if (dScroll >= current.heights.item * 5 || scroll == 0) {
                     scope.$apply(function () {
                         current.counts.calculates++;
                         //var margin = scroll / current.heights.item;
