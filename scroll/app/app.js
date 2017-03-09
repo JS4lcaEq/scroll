@@ -3,6 +3,7 @@
     function MainCtrl($scope) {
         var self = this;
         this.tmplt = "1 + 1 = {{1+var}}";
+        this.rr = [1, 2, 3];
 
 
 
