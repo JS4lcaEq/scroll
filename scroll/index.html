@@ -73,11 +73,7 @@
                 <h2>Directive Sample</h2>
 
                 <div id="vaScrollBox" style="border: 1px solid #f0f; height: 300px;">
-                    <va-scroll va-src="ctrl.src" va-window="ctrl.window" va-length="ctrl.len">
-                        <ul>
-                            <li ng-repeat="(index, item) in ctrl.window" ng-click="onClick(item)">{{item.descr}}</li>
-                        </ul>
-                    </va-scroll>
+                    <va-scroll va-src="<p>{{ctrl.src}}</p>" va-length="ctrl.len"><span>{{item.descr}}</span></va-scroll>
                 </div>
                 <p>{{ctrl.window[0]}}</p>
                 {{ctrl.src[ctrl.src.length - 1]}}
