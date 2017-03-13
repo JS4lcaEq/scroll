@@ -61,13 +61,10 @@
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-6 form-inline">
-                <h2>Data Source</h2>
-                <label>length: </label> <input class="form-control" ng-model="ctrl.cnt" />
-                <button class="btn btn-default" role="button" ng-click="ctrl.fillSrc(ctrl.cnt)">Reset</button>
             </div>
             <div class="col-md-6">
                 <h2>Options</h2>
-                <p class="form-inline"><label>length: </label> <input class="form-control" ng-model="ctrl.len" /></p>
+                <p class="form-inline"><label>Template: </label> <input class="form-control" ng-model="ctrl.tmplt" /></p>
             </div>
             <div class="col-md-12">
                 <h2>Directive Sample</h2>
@@ -75,15 +72,9 @@
                 <div id="vaScrollBox" style="border: 1px solid #f0f; height: 300px;">
                     <va-scroll va-src="<p>{{ctrl.src}}</p>" va-length="ctrl.len"><span>{{item.descr}}</span></va-scroll>
                 </div>
-                <p>{{ctrl.window[0]}}</p>
-                {{ctrl.src[ctrl.src.length - 1]}}
 
-            </div>
-            <!--<div class="col-md-12">
-                <div vs-repeat="10" style="border: solid 1px #000; height: 200px; overflow-y: auto;">
-                    <div ng-repeat="item in ctrl.src">{{item}}</div>
-                </div>
-            </div>-->
+
+          
         </div>
 
 
@@ -111,5 +102,4 @@
     <script>angular.bootstrap("html", ['app']);</script>
 </body>
 </html>
-+
 
