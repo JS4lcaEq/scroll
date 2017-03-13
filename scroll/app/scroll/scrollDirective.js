@@ -26,16 +26,6 @@
                 }
             );
 
-            scope.$watch("vaLength", function (value) {
-
-            });
-
-
-
-            elements.box.on("resize", function (e) {
-
-            });
-
 
         }
 
