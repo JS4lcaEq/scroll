@@ -70,7 +70,7 @@
                 <h2>Directive Sample</h2>
 
                 <div id="vaScrollBox" style="border: 1px solid #f0f; height: 300px;">
-                    <va-scroll va-src="<p>{{ctrl.src}}</p>" va-length="ctrl.len"><span>{{item.descr}}</span></va-scroll>
+                    <va-scroll va-src="item in ctrl.src" va-length="ctrl.len"><span>transclude{{item}}/transclude</span></va-scroll>
                 </div>
 
 

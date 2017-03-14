@@ -2,9 +2,14 @@
 
     function fn($timeout, $compile) {
 
-        function link(scope, element, attr) {
-            var i = element[0].innerHTML;
-            console.log("element = ", i);
+        function link(scope, element, attr, ctrl, transclude) {
+            var current = { transcludeHtml: null };
+            transclude(scope, function (clone, scope) {
+                current.transcludeHtml = clone[0].outerHTML;
+            });
+
+            var i = element;
+            //console.log("transcludeHtml = ", current.transcludeHtml);
             scope.$watch(
                 function (scope) {
                     
@@ -13,10 +18,13 @@
                     return attr.vaSrc;
                 },
                 function (value) {
+                    console.log(attr.vaSrc);
+                    var template = '<p ng-repeat="' + attr.vaSrc + '">' + current.transcludeHtml + '</p>'
+                    //console.log("value = ", value);
                     // when the 'compile' expression changes
                     // assign it into the current DOM
                     //element.html(value);
-                    element.html(value);
+                    element.html(template);
 
                     // compile the new DOM and link it to the current
                     // scope.
@@ -33,7 +41,7 @@
 
         return {
             link: link
-            , transclude: false
+            , transclude: true
             , scope: true
         }
     }
