@@ -1,11 +1,40 @@
 ﻿(function () {
 
+    function extractItemName(src) {
+        var m = src.match(/(\S+)\s+in/i);
+        if (m && m.length > 0) {
+            return m[1];
+        }
+        return null;
+    }
+
+    function extractSrcName(src) {
+        var m = src.match(/in\s+(\S+)/i);
+        if (m && m.length > 0) {
+            return m[1];
+        }
+        return null;
+    }
+
+    function replaceSrcNameToWindow(src) {
+        var ret = src.replace(/(in\s+)\S+/i, "$1 window");
+        return ret;
+    }
+
     function fn($timeout, $compile) {
 
         function link(scope, element, attr, ctrl, transclude) {
+            
             var current = { transcludeHtml: null };
             transclude(scope, function (clone, scope) {
+                scope.window = [1, 2, 3];
                 current.transcludeHtml = clone[0].outerHTML;
+                var template = '<p ng-repeat="' + replaceSrcNameToWindow(attr.vaSrc) + '">' + current.transcludeHtml + '</p>';
+                console.log("template=", template);
+                element.html(template);
+                $compile(element.contents())(scope);
+
+
             });
 
             var i = element;
@@ -18,19 +47,11 @@
                     return attr.vaSrc;
                 },
                 function (value) {
-                    console.log(attr.vaSrc);
-                    var template = '<p ng-repeat="' + attr.vaSrc + '">' + current.transcludeHtml + '</p>'
-                    //console.log("value = ", value);
-                    // when the 'compile' expression changes
-                    // assign it into the current DOM
-                    //element.html(value);
-                    element.html(template);
+                    console.log(extractItemName(attr.vaSrc), " in ", extractSrcName(attr.vaSrc) );
+                    
+                    
 
-                    // compile the new DOM and link it to the current
-                    // scope.
-                    // NOTE: we only compile .childNodes so that
-                    // we don't get into infinite loop compiling ourselves
-                    $compile(element.contents())(scope);
+                    
                 }
             );
 

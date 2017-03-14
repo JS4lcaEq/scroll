@@ -64,7 +64,11 @@
             </div>
             <div class="col-md-6">
                 <h2>Options</h2>
-                <p class="form-inline"><label>Template: </label> <input class="form-control" ng-model="ctrl.tmplt" /></p>
+                <p class="form-inline">
+                    <label>SRC: </label> 
+                    <input class="form-control" ng-model="ctrl.len" />
+                    <button class="form-control" ng-click="ctrl.resetSrc(ctrl.len)" >reset</button>
+                </p>
             </div>
             <div class="col-md-12">
                 <h2>Directive Sample</h2>
