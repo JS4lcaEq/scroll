@@ -17,7 +17,7 @@
     }
 
     function replaceSrcNameToWindow(src) {
-        var ret = src.replace(/(in\s+)\S+/i, "$1 window");
+        var ret = src.replace(/in\s+\S+/i, "in window");
         return ret;
     }
 
