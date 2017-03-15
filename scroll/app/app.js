@@ -8,6 +8,8 @@
         this.src = [1, 2, 3];
         this.resetSrc = function (len) {
             self.src.length = 0;
+            self.src = null;
+            self.src = [];
             for (var i = 0; i < len; i++) {
                 self.src.push(i);
             }

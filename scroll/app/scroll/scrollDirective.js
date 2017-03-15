@@ -25,7 +25,7 @@
 
         function link(scope, element, attr, ctrl, transclude) {
             
-            var current = { transcludeHtml: null };
+            var current = { transcludeHtml: null, srcName: null };
             transclude(scope, function (clone, scope) {
                 scope.window = [1, 2, 3];
                 current.transcludeHtml = clone[0].outerHTML;
@@ -33,28 +33,17 @@
                 console.log("template=", template);
                 element.html(template);
                 $compile(element.contents())(scope);
-
+                current.srcName = extractSrcName(attr.vaSrc); 
 
             });
 
             var i = element;
-            //console.log("transcludeHtml = ", current.transcludeHtml);
-            scope.$watch(
-                function (scope) {
-                    
-                    // watch the 'compile' expression for changes
-                    //return scope.$eval(attr.vaSrc);
-                    return attr.vaSrc;
-                },
-                function (value) {
-                    console.log(extractItemName(attr.vaSrc), " in ", extractSrcName(attr.vaSrc) );
-                    
-                    
 
-                    
-                }
-            );
+            scope.$watch(current.srcName, function (a, b) {
+                scope.window = a;
 
+                console.log("b[" + current.srcName + "] = ", a);
+            });
 
         }
 
