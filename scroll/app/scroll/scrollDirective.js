@@ -29,7 +29,7 @@
             transclude(scope, function (clone, scope) {
                 scope.window = [1, 2, 3];
                 current.transcludeHtml = clone[0].outerHTML;
-                var template = '<p ng-repeat="' + replaceSrcNameToWindow(attr.vaSrc) + '">' + current.transcludeHtml + '</p>';
+                var template = '<li ng-repeat="' + replaceSrcNameToWindow(attr.vaSrc) + '">' + current.transcludeHtml + '</li>';
                 console.log("template=", template);
                 element.html(template);
                 $compile(element.contents())(scope);
